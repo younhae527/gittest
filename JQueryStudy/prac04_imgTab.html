@@ -50,17 +50,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
 <script>
     function tab(index){
-        var firstIndex = index || 0;
-        var btn = $('.list-link');
-        var layer = $('.layer');
-        var img = btn.find('img');
+        var firstIdx = index || 0;
+        var tabBtn = $('.list-link');
+        var tabContent = $('.layer');
+        var tabImg = tabBtn.find('img');
         var oldImg = null;
-        var oldLayer = null;
+        var oldContent = null;
 
         function init(){
-            imgOn(firstIndex);
-            layerOn(firstIndex);
-            btn.on('click', tabOn);
+            imgOn(firstIdx);
+            layerOn(firstIdx);
+            tabBtn.on('click', tabOn);
         }
 
         function tabOn( e ){
@@ -70,27 +70,28 @@
         }
 
         function imgOn(index){
-            var newImg =  img.eq(index);
+            var newImg = tabImg.eq(index);
             var newImgSrc = newImg.attr('src');
 
             newImg.attr('src', newImgSrc.replace('.gif', '_on.gif'));
 
             if(oldImg){
                 var oldImgSrc = oldImg.attr('src');
-
                 oldImg.attr('src', oldImgSrc.replace('_on.gif', '.gif'));
             }
+
             oldImg = newImg;
+
         }
 
         function layerOn(index){
-            var newLayer = layer.eq(index);
+            var newLayer = tabContent.eq(index);
             newLayer.show();
-
-            if(oldLayer){
-                oldLayer.hide();
+W
+            if(oldContent){
+                oldContent.hide();
             }
-            oldLayer = newLayer;
+            oldContent = newLayer;
         }
         init();
     }
