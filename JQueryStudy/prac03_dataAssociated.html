@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charcter="UTF-8" />
+    <title>DATA ASSOCIATED</title>
+</head>
+<body>
+<button id="myId" data-test="{'test' : {'label':'this is label'}}">버튼</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+<script>
+    $('#myId').data('test',{ label : 'this is label' });
+    var test = $('#myId').data('test');
+
+    console.log(test.label);
+</script>
+</body>
+</html>

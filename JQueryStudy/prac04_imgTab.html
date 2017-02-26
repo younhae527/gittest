@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>IMAGE TAB</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .tab-btn {
+            width: 100%;
+            overflow: hidden;
+        }
+        .tab-btn__list {
+            float: left;
+        }
+
+        .layer {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<ul class="tab-btn">
+    <li class="tab-btn__list"><a href="#layer1" class="list-link"><img src="images/report1_btn.gif" alt=""></a></li>
+    <li class="tab-btn__list"><a href="#layer2" class="list-link"><img src="images/report1_btn.gif" alt=""></a></li>
+    <li class="tab-btn__list"><a href="#layer3" class="list-link"><img src="images/report1_btn.gif" alt=""></a></li>
+    <li class="tab-btn__list"><a href="#layer4" class="list-link"><img src="images/report1_btn.gif" alt=""></a></li>
+</ul>
+
+<div id="layer1" class="layer">
+    layer1
+</div>
+<div id="layer2" class="layer">
+    layer2
+</div>
+<div id="layer3" class="layer">
+    layer3
+</div>
+<div id="layer4" class="layer">
+    layer4
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+<script>
+    function tab(index){
+        var firstIndex = index || 0;
+        var btn = $('.list-link');
+        var layer = $('.layer');
+        var img = btn.find('img');
+        var oldImg = null;
+        var oldLayer = null;
+
+        function init(){
+            imgOn(firstIndex);
+            layerOn(firstIndex);
+            btn.on('click', tabOn);
+        }
+
+        function tabOn( e ){
+            var index = $(e.currentTarget).parent().index();
+            imgOn(index);
+            layerOn(index);
+        }
+
+        function imgOn(index){
+            var newImg =  img.eq(index);
+            var newImgSrc = newImg.attr('src');
+
+            newImg.attr('src', newImgSrc.replace('.gif', '_on.gif'));
+
+            if(oldImg){
+                var oldImgSrc = oldImg.attr('src');
+
+                oldImg.attr('src', oldImgSrc.replace('_on.gif', '.gif'));
+            }
+            oldImg = newImg;
+        }
+
+        function layerOn(index){
+            var newLayer = layer.eq(index);
+            newLayer.show();
+
+            if(oldLayer){
+                oldLayer.hide();
+            }
+            oldLayer = newLayer;
+        }
+        init();
+    }
+    tab();
+</script>
+</body>
+</html>
